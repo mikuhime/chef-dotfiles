@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: dotfiles
-# Recipe:: default
+# Recipe:: tmux
 #
 
 package 'tmux' do
