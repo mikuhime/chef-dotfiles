@@ -10,6 +10,7 @@ directory '/Users/miku/.tmux' do
   mode '0700'
   owner 'miku'
 end
+
 directory '/Users/miku/.tmux/plugins' do
   mode '0700'
   owner 'miku'
@@ -37,7 +38,7 @@ cookbook_file '/Users/miku/.tmux.conf' do
 end
 
 # powerline dependencies
-%w(python socat coreutils ).each do |package|
+%w(python socat coreutils).each do |package|
   package package do
   end
 end
