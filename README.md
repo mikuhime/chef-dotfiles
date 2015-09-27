@@ -3,3 +3,4 @@
 
 ## things managed
 * tmux and plugins
+* neo-layout
