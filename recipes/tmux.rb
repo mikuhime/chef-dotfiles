@@ -30,11 +30,18 @@ execute 'reload_tmux' do
   user 'miku'
 end
 
+execute 'install_plugins' do
+  action :nothing
+  command '/Users/miku/.tmux/plugins/tpm/bin/install_plugins'
+  user 'miku'
+end
+
 cookbook_file '/Users/miku/.tmux.conf' do
   source 'tmux.conf'
   mode '0700'
   owner 'miku'
   notifies :run, 'execute[reload_tmux]', :delayed
+  notifies :run, 'execute[install_plugins]', :delayed
 end
 
 # powerline dependencies
