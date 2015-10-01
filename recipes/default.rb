@@ -7,5 +7,6 @@
   directory "/Users/miku/#{dir}" do
     user 'miku'
     mode '700'
+    recursive true
   end
 end
