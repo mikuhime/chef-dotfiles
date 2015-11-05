@@ -1,15 +1,15 @@
 package 'fish' do
 end
 
-directory '/Users/miku/.config/fish' do
-  owner 'miku'
+directory "/Users/#{node['dotfiles']['user']}/.config/fish" do
+  owner node['dotfiles']['user']
   mode '0700'
 end
 
-cookbook_file '/Users/miku/.config/fish/config.fish' do
+cookbook_file "/Users/#{node['dotfiles']['user']}/.config/fish/config.fish" do
   source 'config.fish'
   mode '0700'
-  owner 'miku'
+  owner node['dotfiles']['user']
 end
 
 cookbook_file '/etc/shells' do
@@ -19,7 +19,7 @@ cookbook_file '/etc/shells' do
   mode '644'
 end
 
-user 'miku' do
+user node['dotfiles']['user'] do
   action :modify
   shell '/usr/local/bin/fish'
 end

@@ -14,17 +14,17 @@ remote_file '/Library/Keyboard Layouts/neo.icns' do
   source 'http://wiki.neo-layout.org/browser/mac_osx/neo.icns?format=raw'
 end
 
-remote_file '/Users/miku/Library/Application Support/Karabiner/private.xml' do
+remote_file "/Users/#{node['dotfiles']['user']}/Library/Application Support/Karabiner/private.xml" do
   source 'http://wiki.neo-layout.org/browser/mac_osx/private.xml?format=raw'
   mode '0700'
-  owner 'miku'
+  owner node['dotfiles']['user']
   notifies :run, 'execute[karabiner_reload_xml]', :immediately
 end
 
 execute 'karabiner_reload_xml' do
   action :nothing
   command '/Applications/Karabiner.app/Contents/Library/bin/karabiner reloadxml'
-  user 'miku'
+  user node['dotfiles']['user']
 end
 
 neo_settings = []
@@ -36,6 +36,6 @@ neo_settings.each do |setting|
     action :run
     command "/Applications/Karabiner.app/Contents/Library/bin/karabiner set #{setting} 1"
     not_if "/Applications/Karabiner.app/Contents/Library/bin/karabiner changed | grep #{setting}"
-    user 'miku'
+    user node['dotfiles']['user']
   end
 end
