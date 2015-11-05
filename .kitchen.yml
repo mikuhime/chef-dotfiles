@@ -1,0 +1,25 @@
+---
+driver:
+  name: vagrant
+  provider: parallels
+  vagrantfiles:
+    - Vagrantfile_extension.rb
+
+provisioner:
+  name: chef_solo
+  require_chef_omnibus: 11.18.12
+
+platforms:
+  - name: osx-10.11
+
+suites:
+  - name: default
+    run_list:
+      - recipe[dotfiles::default]
+      - recipe[dotfiles::docker_parallels]
+      - recipe[dotfiles::fish]
+      - recipe[dotfiles::neo_layout]
+      - recipe[dotfiles::tmux]
+    attributes:
+      dotfiles:
+        user: vagrant
