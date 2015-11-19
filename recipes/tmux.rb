@@ -43,22 +43,3 @@ cookbook_file "/Users/#{node['dotfiles']['user']}/.tmux.conf" do
   notifies :run, 'execute[reload_tmux]', :delayed
   notifies :run, 'execute[install_plugins]', :delayed
 end
-
-# powerline dependencies
-%w(python socat coreutils).each do |package|
-  package package do
-  end
-end
-
-homebrewalt_tap 'caskroom/fonts'
-homebrew_cask 'font-sauce-code-powerline' do
-end
-
-%w(powerline-status psutil).each do |package|
-  execute "install #{package}" do
-    action :run
-    command "pip install #{package}"
-    guard_interpreter :bash
-    not_if "pip show #{package}"
-  end
-end
